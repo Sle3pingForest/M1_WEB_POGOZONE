@@ -13,10 +13,10 @@ public final class ConnexionBDD {
 	private Connection cnx; 
 	  final public static String host = "localhost";
 	  final public static  String user = "root";
-	  final public static String passwd = "15041994";
-	private ConnexionBDD() {
+	  final public static String passwd = "";
+	private ConnexionBDD() throws IOException {
 		try {
-			/*Properties p = new Properties();
+			Properties p = new Properties();
 			p.load(Thread.currentThread().getContextClassLoader().
 						getResourceAsStream("confBDD.properties"));
 			
@@ -24,11 +24,13 @@ public final class ConnexionBDD {
 				
 			// chargement du driver
 			Class.forName(p.getProperty("driver"));
-			cnx = DriverManager.getConnection(p.getProperty("url"),
-					p.getProperty("user"), p.getProperty("pwd"));*/
-			Class.forName("com.mysql.jdbc.Driver");   	
-		    cnx = DriverManager.getConnection("jdbc:mysql://" + "localhost" + "/Corrector?"+ "user=" + user + "&password=" + passwd );
-		    //System.out.println("jdbc:mysql://" + "localhost" + "/Corrector?"+ "user=" + user + "&password=" + passwd );
+			String paramConnexion = p.getProperty("url") +"user="+ p.getProperty("user") +"&password="+ p.getProperty("pwd") ;
+			//System.out.println(paramConnexion );
+			//System.out.println("jdbc:mysql://" + "localhost" + "/Corrector?"+ "user=" + user + "&password=" + passwd );
+			cnx = DriverManager.getConnection(paramConnexion);
+			
+			/*Class.forName("com.mysql.jdbc.Driver");   	
+		    cnx = DriverManager.getConnection("jdbc:mysql://" + "localhost" + "/Corrector?"+ "user=" + user + "&password=" + passwd );*/
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -37,7 +39,7 @@ public final class ConnexionBDD {
 		} 
 	} 
 	
-	public static synchronized ConnexionBDD getInstance() {
+	public static synchronized ConnexionBDD getInstance() throws IOException {
 		if(instance==null)
 			instance = new ConnexionBDD();
 		
