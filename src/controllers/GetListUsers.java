@@ -36,7 +36,7 @@ public class GetListUsers extends HttpServlet {
 		StringBuilder users= new StringBuilder("");
         String head = "List all users" ;  
 		try {
-			listUsers = UsersDAO.selectAll();
+			listUsers = UsersDAO.selectUsersName();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
