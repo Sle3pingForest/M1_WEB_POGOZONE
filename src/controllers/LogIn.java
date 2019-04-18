@@ -70,6 +70,9 @@ public class LogIn extends HttpServlet {
              if(utilisateur.getEmail().equals("user@user.com")){
                  this.getServletContext().getRequestDispatcher(VUE_USERS).forward( request, response );
              }
+             else{
+            	 this.getServletContext().getRequestDispatcher(VUE_LOGIN).forward( request, response );
+             }
         }
         else{
             this.getServletContext().getRequestDispatcher( VUE_LOGIN).forward( request, response );

@@ -21,7 +21,7 @@ public class Inscription extends HttpServlet {
   
     public static final String ATT_USER = "utilisateur";
     public static final String ATT_FORM = "form";
-    public static final String VUE = "/Inscription.jsp";
+    public static final String VUE = "/LogIn.jsp";
     /**
      * @see HttpServlet#HttpServlet()
      */
