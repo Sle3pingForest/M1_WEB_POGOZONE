@@ -28,6 +28,7 @@ public class LogIn extends HttpServlet {
     public static final String VUE_ADMIN            = "/admin/Admin.jsp";
     public static final String VUE_LOGIN            = "/LogIn.jsp";
     public static Map<String,String> listAdmin  = null;
+    public static Map<String,String> listUsers  = null;
 
     public void doGet( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException {
         /* Affichage de la page de connexion */
@@ -63,15 +64,14 @@ public class LogIn extends HttpServlet {
         
         System.out.println(utilisateur.getEmail());
        
-        if(session.getAttribute(ATT_SESSION_USER) != null){
+        if(session.getAttribute(ATT_SESSION_USER) != null 
+        		&& (isAdmin(utilisateur.getEmail(), utilisateur.getMotDePasse())
+        		|| 	isUsers(utilisateur.getEmail(),utilisateur.getMotDePasse()))){
         	 if(isAdmin(utilisateur.getEmail(), utilisateur.getMotDePasse())){
                  this.getServletContext().getRequestDispatcher(VUE_ADMIN).forward( request, response );
              }
-             if(utilisateur.getEmail().equals("user@user.com")){
+        	 else if(isUsers(utilisateur.getEmail(),utilisateur.getMotDePasse())){
                  this.getServletContext().getRequestDispatcher(VUE_USERS).forward( request, response );
-             }
-             else{
-            	 this.getServletContext().getRequestDispatcher(VUE_LOGIN).forward( request, response );
              }
         }
         else{
@@ -96,8 +96,26 @@ public class LogIn extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-    	
     	return is_admin & correct_pass;
+    	
+    }
+    
+    
+    private boolean isUsers(String mail, String pass){
+    	boolean is_user = false;
+    	boolean correct_pass = false;
+    	try {
+			listUsers = UsersDAO.selectUsers();
+			System.out.println(listUsers.get(mail));
+			if(listUsers.containsKey(mail) && listUsers.get(mail).equals(pass)){
+	    		is_user = true;
+	    		correct_pass = true;
+	    	}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	return is_user & correct_pass;
     	
     }
 

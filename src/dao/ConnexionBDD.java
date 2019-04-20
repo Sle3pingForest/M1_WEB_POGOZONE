@@ -18,11 +18,11 @@ public final class ConnexionBDD {
 		try {
 			Properties p = new Properties();
 			p.load(Thread.currentThread().getContextClassLoader().
-						getResourceAsStream("confBDD.properties"));
+						getResourceAsStream("confBDD.properties")); 
 			
 			
 				
-			// chargement du driver
+			// chargement du driver ATTENTION A LES DONNE DES LE FICHIERS confBDD.properties 
 			Class.forName(p.getProperty("driver"));
 			String paramConnexion = p.getProperty("url") +"user="+ p.getProperty("user") +"&password="+ p.getProperty("pwd") ;
 			//System.out.println(paramConnexion );

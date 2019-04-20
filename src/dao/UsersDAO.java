@@ -14,23 +14,24 @@ public class UsersDAO {
 
 	protected static PreparedStatement preparedStatement = null;
 	protected static ResultSet resultSet = null;
-	protected static ArrayList<String> listUsers = null;
-	protected static ArrayList<String> listMail = null;
+	protected static ArrayList<String> listUserName = null;
 	protected static Map<String, String> listAdmin = null;
+	protected static Map<String, String> listUsers = null;
 	protected static Statement statement = null;
 
-	public static ArrayList<String> selectUsersName() throws Exception {
+	public static Map<String, String> selectUsers() throws Exception {
 
 		ConnexionBDD connect = ConnexionBDD.getInstance();
 
 		try {
 			statement = connect.getCnx().createStatement();
-			preparedStatement = connect.getCnx().prepareStatement("SELECT NOM from USER WHERE EST_ADMIN IS NULL");
+			preparedStatement = connect.getCnx().prepareStatement("SELECT * from USER WHERE EST_ADMIN IS NULL");
 			resultSet = preparedStatement.executeQuery();
-			listUsers = new ArrayList<>();
+			listUsers = new HashMap<String,String>();
 			while (resultSet.next()) {
-				String user = resultSet.getString("NOM");
-				listUsers.add(user);
+				String email = resultSet.getString("E_MAIL");
+				String pass = resultSet.getString("PASSWORD");
+				listUsers.put(email,pass);
 			}
 		} catch (Exception e) {
 			throw e;
@@ -42,18 +43,18 @@ public class UsersDAO {
 
 	}
 
-	public static ArrayList<String> selectUsersMail() throws Exception {
+	public static ArrayList<String> selectUsersName() throws Exception {
 
 		ConnexionBDD connect = ConnexionBDD.getInstance();
 
 		try {
 			statement = connect.getCnx().createStatement();
-			preparedStatement = connect.getCnx().prepareStatement("SELECT E_MAIL from USER WHERE EST_ADMIN IS NULL");
+			preparedStatement = connect.getCnx().prepareStatement("SELECT NOM from USER WHERE EST_ADMIN IS NULL");
 			resultSet = preparedStatement.executeQuery();
-			listMail = new ArrayList<>();
+			listUserName = new ArrayList<>();
 			while (resultSet.next()) {
-				String email = resultSet.getString("E_MAIL");
-				listMail.add(email);
+				String email = resultSet.getString("NOM");
+				listUserName.add(email);
 			}
 		} catch (Exception e) {
 			throw e;
@@ -61,7 +62,7 @@ public class UsersDAO {
 			connect.closeCnx();
 		}
 
-		return listMail;
+		return listUserName;
 	}
 
 	public static Map<String, String> selectAdmin() throws Exception {
@@ -86,4 +87,21 @@ public class UsersDAO {
 		}
 		return listAdmin;
 	}
+	
+	public static void insertUser(String nom, String pass, String date , String email, String ville, String code )throws Exception{
+		ConnexionBDD connect = ConnexionBDD.getInstance();
+		try {
+			statement = connect.getCnx().createStatement();
+			String q = "INSERT INTO USER (NOM, PASSWORD, DATE_NAISSANCE, E_MAIL, VILLE, CODE_POSTAL)  " + "VALUES ('"+nom +"','" + pass+"'," + "STR_TO_DATE('"+ date+ "','%d/%m/%Y')" +",'"+ email +"','"+ville + "','"+code  +"')";
+			System.out.println(q);
+			preparedStatement = connect.getCnx().prepareStatement(q);
+			preparedStatement.executeUpdate();
+		} catch (Exception e) {
+			throw e;
+		} finally {
+			connect.closeCnx();
+		}
+	}
+	
+
 }
