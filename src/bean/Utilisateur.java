@@ -7,6 +7,7 @@ public class Utilisateur {
     private String dateNaissance;
     private String ville;
     private String code;
+    private boolean isAdmin = false;
 
     public void setEmail(String email) {
 	this.email = email;
@@ -47,5 +48,7 @@ public class Utilisateur {
 		this.code = code;
 	}
     
-    
+    public void setAdmin(boolean b){
+    	this.isAdmin = b;
+    }
 }

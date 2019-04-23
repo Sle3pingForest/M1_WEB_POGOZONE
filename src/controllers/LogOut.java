@@ -31,7 +31,7 @@ public class LogOut extends HttpServlet {
 		// TODO Auto-generated method stub
 		HttpSession session = request.getSession();
         session.invalidate();
-        response.sendRedirect(request.getContextPath() + URL_REDIRECTION );
+        response.sendRedirect(request.getContextPath()+URL_REDIRECTION );
         //response.sendRedirect("");
 	}
 

@@ -14,18 +14,21 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
-
+import javax.swing.JOptionPane;
 
 /**
  * Servlet Filter implementation class LoginFilter
  */
-//@WebFilter("/LoginFilter")
+// @WebFilter("/LoginFilter")
 public class LoginFilter implements Filter {
 
-    public static final String ACCES_PUBLIC     = "/AccesPublic.jsp";
-    public static final String ATT_SESSION_USER = "sessionUtilisateur";
-    public static final String ACCES_CONNEXION     = "/LogIn.jsp";
+	public static final String ACCES_PUBLIC = "/AccesPublic.jsp";
+	public static final String ACCES_USER = "/user/User.jsp";
+	public static final String ATT_SESSION_USER = "sessionUtilisateur";
+	public static final String ATT_ADMIN = "admin";
+	public static final String ATT_USER = "user";
+	public static final String ACCES_CONNEXION = "/LogIn.jsp";
+
 	/**
 	 * Default constructor.
 	 */
@@ -45,24 +48,27 @@ public class LoginFilter implements Filter {
 	 */
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
-        HttpServletRequest req = (HttpServletRequest) request;
-        HttpServletResponse res = (HttpServletResponse) response;
+		HttpServletRequest req = (HttpServletRequest) request;
+		HttpServletResponse res = (HttpServletResponse) response;
 
-        /* Récupération de la session depuis la requête */
-        HttpSession session = req.getSession();
+		/* Récupération de la session depuis la requête */
+		HttpSession session = req.getSession();
 
-        /**
-         * Si l'objet utilisateur n'existe pas dans la session en cours, alors
-         * l'utilisateur n'est pas connecté.
-         */
-        if ( session.getAttribute( ATT_SESSION_USER ) == null ) {
-            /* Redirection vers la page publique */
-            //res.sendRedirect( req.getContextPath() + ACCES_PUBLIC );
-        	res.sendRedirect( req.getContextPath() + ACCES_CONNEXION );
-        } else {
-            /* Affichage de la page restreinte */
-            chain.doFilter( req, res );
-        }
+		/**
+		 * Si l'objet utilisateur n'existe pas dans la session en cours, alors
+		 * l'utilisateur n'est pas connecté.
+		 */
+
+		/* Affichage de la page restreinte */
+		System.out.println(session.getAttribute(ATT_ADMIN));
+		if (session.getAttribute(ATT_SESSION_USER) != null && (boolean) session.getAttribute(ATT_ADMIN)) {
+			chain.doFilter(req, res);
+		} 
+		else {
+			System.out.println(req.getContextPath());
+			res.sendRedirect(req.getContextPath() + ACCES_CONNEXION);
+		}
+
 	}
 
 	/**

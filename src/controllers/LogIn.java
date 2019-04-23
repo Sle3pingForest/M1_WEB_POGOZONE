@@ -19,12 +19,13 @@ import forms.LogInForm;
 /**
  * Servlet implementation class Login
  */
-//@WebServlet("/Login")
+//@WebServlet("/User")
 public class LogIn extends HttpServlet {
     public static final String ATT_USER         = "utilisateur";
     public static final String ATT_FORM         = "form";
+    public static final String ATT_ADMIN        = "admin";
     public static final String ATT_SESSION_USER = "sessionUtilisateur";
-    public static final String VUE_USERS             = "/WEB-INF/User.jsp";
+    public static final String VUE_USERS             = "/user/User.jsp";
     public static final String VUE_ADMIN            = "/admin/Admin.jsp";
     public static final String VUE_LOGIN            = "/LogIn.jsp";
     public static Map<String,String> listAdmin  = null;
@@ -51,7 +52,7 @@ public class LogIn extends HttpServlet {
          * Utilisateur à la session, sinon suppression du bean de la session.
          */
         if ( form.getErreurs().isEmpty() ) {
-            session.setAttribute( ATT_SESSION_USER, utilisateur );
+            session.setAttribute( ATT_SESSION_USER, utilisateur);
         } 
         else {
             session.setAttribute( ATT_SESSION_USER, null );
@@ -68,9 +69,13 @@ public class LogIn extends HttpServlet {
         		&& (isAdmin(utilisateur.getEmail(), utilisateur.getMotDePasse())
         		|| 	isUsers(utilisateur.getEmail(),utilisateur.getMotDePasse()))){
         	 if(isAdmin(utilisateur.getEmail(), utilisateur.getMotDePasse())){
+        		 utilisateur.setAdmin(true);
+        		 session.setAttribute(ATT_ADMIN, true);
+        		 System.out.println("session " + session.getAttribute(ATT_ADMIN));
                  this.getServletContext().getRequestDispatcher(VUE_ADMIN).forward( request, response );
              }
         	 else if(isUsers(utilisateur.getEmail(),utilisateur.getMotDePasse())){
+        		 session.setAttribute(ATT_ADMIN, false);
                  this.getServletContext().getRequestDispatcher(VUE_USERS).forward( request, response );
              }
         }
