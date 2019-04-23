@@ -47,39 +47,36 @@ public class LogIn extends HttpServlet {
         HttpSession session = request.getSession();
         
 
-        /**
-         * Si aucune erreur de validation n'a eu lieu, alors ajout du bean
-         * Utilisateur à la session, sinon suppression du bean de la session.
-         */
-        if ( form.getErreurs().isEmpty() ) {
-            session.setAttribute( ATT_SESSION_USER, utilisateur);
-        } 
-        else {
-            session.setAttribute( ATT_SESSION_USER, null );
-        }
+     
         
-
-        /* Stockage du formulaire et du bean dans l'objet request */
-        request.setAttribute( ATT_FORM, form );
-        request.setAttribute( ATT_USER, utilisateur );
-        
-        System.out.println(utilisateur.getEmail());
-       
-        if(session.getAttribute(ATT_SESSION_USER) != null 
-        		&& (isAdmin(utilisateur.getEmail(), utilisateur.getMotDePasse())
-        		|| 	isUsers(utilisateur.getEmail(),utilisateur.getMotDePasse()))){
+        if((isAdmin(utilisateur.getEmail(), utilisateur.getMotDePasse())|| 	isUsers(utilisateur.getEmail(),utilisateur.getMotDePasse()))){
+        	   if(form.getErreurs().isEmpty() ) {
+                   session.setAttribute( ATT_SESSION_USER, utilisateur);
+               } 
+               else {
+                   session.setAttribute( ATT_SESSION_USER, null );
+               }
+               
+               request.setAttribute( ATT_FORM, form );
+               request.setAttribute( ATT_USER, utilisateur );
         	 if(isAdmin(utilisateur.getEmail(), utilisateur.getMotDePasse())){
         		 utilisateur.setAdmin(true);
         		 session.setAttribute(ATT_ADMIN, true);
-        		 System.out.println("session " + session.getAttribute(ATT_ADMIN));
                  this.getServletContext().getRequestDispatcher(VUE_ADMIN).forward( request, response );
              }
         	 else if(isUsers(utilisateur.getEmail(),utilisateur.getMotDePasse())){
         		 session.setAttribute(ATT_ADMIN, false);
+        		 System.out.println("nom users "  +utilisateur.getNom());
+
+        		 request.setAttribute("name", utilisateur.getNom());
                  this.getServletContext().getRequestDispatcher(VUE_USERS).forward( request, response );
              }
         }
         else{
+             session.setAttribute( ATT_SESSION_USER, null );
+             request.setAttribute( ATT_FORM, form );
+             request.setAttribute( ATT_USER, null );
+             form.setResultat("Erreur connexion: login ou mdp incorrect");
             this.getServletContext().getRequestDispatcher( VUE_LOGIN).forward( request, response );
         }
 
@@ -92,7 +89,6 @@ public class LogIn extends HttpServlet {
     	boolean correct_pass = false;
     	try {
 			listAdmin = UsersDAO.selectAdmin();
-			System.out.println(listAdmin.get(mail));
 			if(listAdmin.containsKey(mail) && listAdmin.get(mail).equals(pass)){
 	    		is_admin = true;
 	    		correct_pass = true;
@@ -111,7 +107,6 @@ public class LogIn extends HttpServlet {
     	boolean correct_pass = false;
     	try {
 			listUsers = UsersDAO.selectUsers();
-			System.out.println(listUsers.get(mail));
 			if(listUsers.containsKey(mail) && listUsers.get(mail).equals(pass)){
 	    		is_user = true;
 	    		correct_pass = true;

@@ -34,15 +34,15 @@ public class GetListUsers extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		StringBuilder users= new StringBuilder("");
-        String head = "List all users" ;  
+        String head = "List all users ";  
 		try {
 			listUsers = UsersDAO.selectUsersName();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		users.append(head +"\n");
+		users.append(head +" </br> " + " </br> ");
 		for(String s: listUsers){
-			users.append(s+'\n');
+			users.append(s+ " </br> ");
 		}
 
         System.out.println(users.toString());

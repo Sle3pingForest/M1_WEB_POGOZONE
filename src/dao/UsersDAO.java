@@ -18,6 +18,7 @@ public class UsersDAO {
 	protected static Map<String, String> listAdmin = null;
 	protected static Map<String, String> listUsers = null;
 	protected static Statement statement = null;
+	protected String nameLogIn = "";
 
 	public static Map<String, String> selectUsers() throws Exception {
 
@@ -53,8 +54,8 @@ public class UsersDAO {
 			resultSet = preparedStatement.executeQuery();
 			listUserName = new ArrayList<>();
 			while (resultSet.next()) {
-				String email = resultSet.getString("NOM");
-				listUserName.add(email);
+				String nom = resultSet.getString("NOM");
+				listUserName.add(nom);
 			}
 		} catch (Exception e) {
 			throw e;

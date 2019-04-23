@@ -17,7 +17,9 @@ public final class LogInForm {
     public String getResultat() {
         return resultat;
     }
-
+    public void setResultat(String s) {
+        resultat = s;
+    }
     public Map<String, String> getErreurs() {
         return erreurs;
     }
@@ -80,7 +82,7 @@ public final class LogInForm {
     /*
      * Ajoute un message correspondant au champ spécifié à la map des erreurs.
      */
-    private void setErreur( String champ, String message ) {
+    public void setErreur( String champ, String message ) {
         erreurs.put( champ, message );
     }
 

@@ -11,6 +11,7 @@
 	 		String listusers = (String)request.getAttribute("lu");
 			if((String)request.getAttribute("lu") != null ){
 				out.println(listusers);
+
 		    }
     	%>
 </body>

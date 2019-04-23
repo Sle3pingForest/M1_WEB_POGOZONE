@@ -1,4 +1,3 @@
-
 <%@page import="controllers.LogOut"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -10,7 +9,10 @@
 </head>
 <body>
 	<p> hello users</p>
-	
+	<%
+ 	String attribut = (String)request.getAttribute("name");
+	out.println( attribut); 
+	%>
 	<form action="Deconnexion" method="GET">
 	  	<input type="submit" value="Log Out"/>
 	</form>
