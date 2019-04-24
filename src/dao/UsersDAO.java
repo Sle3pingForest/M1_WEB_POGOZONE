@@ -17,6 +17,7 @@ public class UsersDAO {
 	protected static ArrayList<String> listUserName = null;
 	protected static Map<String, String> listAdmin = null;
 	protected static Map<String, String> listUsers = null;
+	protected static Map<String, String> listUsersIdName = null;
 	protected static Statement statement = null;
 	protected String nameLogIn = "";
 
@@ -44,18 +45,19 @@ public class UsersDAO {
 
 	}
 
-	public static ArrayList<String> selectUsersName() throws Exception {
+	public static Map<String,String> selectUsersIdName() throws Exception {
 
 		ConnexionBDD connect = ConnexionBDD.getInstance();
 
 		try {
 			statement = connect.getCnx().createStatement();
-			preparedStatement = connect.getCnx().prepareStatement("SELECT NOM from USER WHERE EST_ADMIN IS NULL");
+			preparedStatement = connect.getCnx().prepareStatement("SELECT * from USER WHERE EST_ADMIN IS NULL");
 			resultSet = preparedStatement.executeQuery();
-			listUserName = new ArrayList<>();
+			listUsersIdName = new HashMap<>();
 			while (resultSet.next()) {
+				String id = resultSet.getString("ID_USER");
 				String nom = resultSet.getString("NOM");
-				listUserName.add(nom);
+				listUsersIdName.put(id,nom);
 			}
 		} catch (Exception e) {
 			throw e;
@@ -63,7 +65,7 @@ public class UsersDAO {
 			connect.closeCnx();
 		}
 
-		return listUserName;
+		return listUsersIdName;
 	}
 
 	public static Map<String, String> selectAdmin() throws Exception {
