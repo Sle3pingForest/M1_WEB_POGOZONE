@@ -44,7 +44,7 @@
  
   <servlet>
     <servlet-name>SupprimerUser</servlet-name>
-    <servlet-class>controllers.Supprimer</servlet-class>
+    <servlet-class>controllers.SupprimerUser</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>SupprimerUser</servlet-name>

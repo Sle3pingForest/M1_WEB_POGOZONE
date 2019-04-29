@@ -1,7 +1,7 @@
 <%@page import="controllers.Inscription"%>
 <%@page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -10,12 +10,13 @@
 </head>
 <body>
 
-	<form  method="POST" action ="SupprimerUser">
-	<c:forEach var="type" items="${listename}" >
-		ID:  ${type.key}
-   		Name: ${type.value}
-        <input type="submit" id="${type.key}" name="${type.key}" value="Supprimer"">
-	</c:forEach>
-    </form>
+		<c:forEach var="type" items="${listename}">
+		<form method="POST" action="SupprimerUser">
+		        ID: <input type="text" name="idUser" value="${type.key}"  size="5" readOnly="true"/>
+				Name: <input type="text" name="nameUser" value="${type.value}" />
+				<input type="submit" value="Supprimer" />
+				<br>
+		</form>
+		</c:forEach>
 </body>
 </html>

@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 //@WebServlet("/SupprimerUser")
 public class SupprimerUser extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+    public static final String VUE_USERS        = "/admin/ListUsers.jsp";
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -27,7 +28,9 @@ public class SupprimerUser extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		System.out.println(request.getParameter("idUser") + ": " + request.getParameter("nameUser"));
+		
+		this.getServletContext().getRequestDispatcher(VUE_USERS).forward( request, response );
 	}
 
 	/**
