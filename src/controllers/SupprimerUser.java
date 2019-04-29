@@ -1,20 +1,27 @@
 package controllers;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import dao.UsersDAO;
+
 /**
  * Servlet implementation class SupprimerUser
  */
-//@WebServlet("/SupprimerUser")
+@WebServlet("/SupprimerUser")
 public class SupprimerUser extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+    public static final String ATT_NAME          = "listename";
     public static final String VUE_USERS        = "/admin/ListUsers.jsp";
-       
+
+	private static Map<String ,String> listUsersName= new HashMap<>();
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -30,6 +37,18 @@ public class SupprimerUser extends HttpServlet {
 		// TODO Auto-generated method stub
 		System.out.println(request.getParameter("idUser") + ": " + request.getParameter("nameUser"));
 		
+		try {
+			UsersDAO.deleteUser(request.getParameter("idUser"), request.getParameter("nameUser"));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		try {
+			listUsersName = UsersDAO.selectUsersIdName();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+        request.setAttribute(ATT_NAME, listUsersName);
 		this.getServletContext().getRequestDispatcher(VUE_USERS).forward( request, response );
 	}
 

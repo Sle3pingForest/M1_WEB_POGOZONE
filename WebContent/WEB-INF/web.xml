@@ -40,8 +40,6 @@
     <servlet-name>Inscription</servlet-name>
     <url-pattern>/Inscription</url-pattern>
   </servlet-mapping>
-  
- 
   <servlet>
     <servlet-name>SupprimerUser</servlet-name>
     <servlet-class>controllers.SupprimerUser</servlet-class>
@@ -50,7 +48,6 @@
     <servlet-name>SupprimerUser</servlet-name>
     <url-pattern>/SupprimerUser</url-pattern>
   </servlet-mapping>
-  
   <servlet>
     <servlet-name>Connexion</servlet-name>
     <servlet-class>controllers.LogIn</servlet-class>
@@ -66,5 +63,13 @@
   <servlet-mapping>
     <servlet-name>Deconnexion</servlet-name>
     <url-pattern>/Deconnexion</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>Profile</servlet-name>
+    <servlet-class>controllers.ProfileServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Profile</servlet-name>
+    <url-pattern>/Profile</url-pattern>
   </servlet-mapping>
 </web-app>

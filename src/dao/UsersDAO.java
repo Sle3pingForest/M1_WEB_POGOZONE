@@ -106,5 +106,21 @@ public class UsersDAO {
 		}
 	}
 	
+	public static void deleteUser(String id, String name )throws Exception{
+		ConnexionBDD connect = ConnexionBDD.getInstance();
+		try {
+			statement = connect.getCnx().createStatement();
+			String q = "DELETE FROM USER WHERE ID_USER = " + id +" AND NOM  ='"+name+"'";
+			
+			System.out.println(q);
+			preparedStatement = connect.getCnx().prepareStatement(q);
+			preparedStatement.executeUpdate();
+		} catch (Exception e) {
+			throw e;
+		} finally {
+			connect.closeCnx();
+		}
+	}
+	
 
 }

@@ -1,4 +1,4 @@
-<%@page import="controllers.Inscription"%>
+<%@page import="controllers.ProfileServlet"%>
 <%@page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -11,6 +11,7 @@
 <body>
 
 		<c:forEach var="type" items="${listename}">
+		
 		<form method="POST" action="SupprimerUser">
 		        ID: <input type="text" name="idUser" value="${type.key}"  size="5" readOnly="true"/>
 				Name: <input type="text" name="nameUser" value="${type.value}" />
@@ -18,5 +19,9 @@
 				<br>
 		</form>
 		</c:forEach>
+		<form action="Profile" method="GET">
+	  		<input type="submit" value="Profile"/>
+		</form>
+
 </body>
 </html>

@@ -19,7 +19,7 @@ import forms.LogInForm;
 /**
  * Servlet implementation class Login
  */
-//@WebServlet("/User")
+@WebServlet("/User")
 public class LogIn extends HttpServlet {
     public static final String ATT_USER         = "utilisateur";
     public static final String ATT_FORM         = "form";
