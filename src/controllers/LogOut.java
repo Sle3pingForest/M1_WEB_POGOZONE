@@ -11,7 +11,7 @@ import javax.servlet.http.HttpSession;
 /**
  * Servlet implementation class LogOut
  */
-//@WebServlet("/Deconnexion")
+@WebServlet("/Deconnexion")
 public class LogOut extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -31,6 +31,7 @@ public class LogOut extends HttpServlet {
 		// TODO Auto-generated method stub
 		HttpSession session = request.getSession();
         session.invalidate();
+        System.out.println(request.getContextPath());
         response.sendRedirect(request.getContextPath()+URL_REDIRECTION );
         //response.sendRedirect("");
 	}
