@@ -17,6 +17,10 @@
 		<form action="AjoutProduit" method="GET">
 	  	<input type="submit" value="Ajouter Produit"/>
 	</form>
+	</form>
+		<form action="GetListProduit" method="GET">
+	  	<input type="submit" value="Liste Produit"/>
+	</form>
 	
 	<form action="Deconnexion" method="GET">
 	  	<input type="submit" value="Log Out"/>

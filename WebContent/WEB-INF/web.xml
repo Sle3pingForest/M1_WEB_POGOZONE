@@ -80,6 +80,4 @@
     <servlet-name>AjoutProduit</servlet-name>
     <url-pattern>/AjoutProduit</url-pattern>
   </servlet-mapping>
-  
-  
 </web-app>

@@ -13,6 +13,11 @@
  	String attribut = (String)request.getAttribute("name");
 	out.println( attribut); 
 	%>
+	</form>
+		<form action="GetListProduit" method="GET">
+	  	<input type="submit" value="Liste Produit"/>
+	</form>
+	
 	<form action="Deconnexion" method="GET">
 	  	<input type="submit" value="Log Out" onClick="return confirmLogout()"/>
 	</form>

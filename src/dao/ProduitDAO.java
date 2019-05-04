@@ -49,7 +49,7 @@ public class ProduitDAO {
 		
 	}
 	
-	public ArrayList<Produit> listProduit() throws Exception {
+	public static ArrayList<Produit> listProduit() throws Exception {
 		Statement statement = null;
 		ResultSet rs = null;
 		ArrayList<Produit> listProduit = new ArrayList<>();
