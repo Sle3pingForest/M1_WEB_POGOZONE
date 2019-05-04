@@ -5,6 +5,9 @@ public class Produit {
 	private String marque;
 	private int stock_dispo;
 	
+	public Produit() {
+		
+	}
 	
 	
 	public Produit(String type_produit, String marque, int stock_dispo) {

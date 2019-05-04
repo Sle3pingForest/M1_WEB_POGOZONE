@@ -100,6 +100,12 @@ public class ProduitDAO {
 		return listProduit;
 	}
 
+
+	public static void insertProduit(Produit produit) throws Exception {
+		insertProduit(produit.getType_produit(), produit.getMarque(), produit.getStock_dispo());
+		
+	}
+
 	
 	
 

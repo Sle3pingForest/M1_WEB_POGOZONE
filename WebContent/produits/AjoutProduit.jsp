@@ -15,8 +15,16 @@
     <input type ="text" name = "marque" /><br/>
 	<label for="stock">Stock Disponible : </label>
     <input type="text" name="stock"/>
+    <input type="submit" value="Ajouter"/>
 
 </form>
+
+ <%
+
+        	String attribut =(String) request.getParameter("type_produit");
+        	out.println(attribut);
+        %>
+
 
 </body>
 </html>

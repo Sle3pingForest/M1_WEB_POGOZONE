@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import bean.Produit;
+import dao.ProduitDAO;
+import dao.UsersDAO;
 import forms.ProduitForm;
 
 /**
@@ -18,7 +20,8 @@ public class AjoutProduit extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 	
-	public static final String VUE_FORMULAIRE_AJOUT = "/AjoutProduit.jsp";
+	public static final String VUE_FORMULAIRE_AJOUT = "/produits/AjoutProduit.jsp";
+    public static final String VUE_ADMIN = "/admin/Admin.jsp";
 	
     /**
      * @see HttpServlet#HttpServlet()
@@ -37,10 +40,17 @@ public class AjoutProduit extends HttpServlet {
 		ProduitForm form = new ProduitForm();
 		Produit produit = form.ajouterProduit(request);
 		if(produit!=null && form.getErreurs().isEmpty()) {
-			
+			try {
+				ProduitDAO.insertProduit(produit);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+			this.getServletContext().getRequestDispatcher( VUE_ADMIN ).forward( request, response );
 		}
 		else {
-			
+			this.getServletContext().getRequestDispatcher( VUE_FORMULAIRE_AJOUT ).forward( request, response );
 		}
 	}
 

@@ -19,29 +19,32 @@ public final class ProduitForm {
     public Produit ajouterProduit(HttpServletRequest request) {
     	String type = getValeurChamp(request, CHAMP_TYPE);
     	String marque = getValeurChamp(request, CHAMP_MARQUE);
-    	String stock = getValeurChamp(request, CHAMP_TYPE);
+    	String stock = getValeurChamp(request, CHAMP_STOCK);
     	
     	Produit produit = new Produit();
     	
     	try {
     		validationType(type);
+    		produit.setType_produit(type);
     	}catch (Exception e) {
 			setErreur(CHAMP_TYPE, e.getMessage());
 		}
-    	produit.setType_produit(type);
+    	
     	try {
     		validationMarque(marque);
+    		produit.setMarque(marque);
     	}catch (Exception e) {
 			setErreur(CHAMP_MARQUE, e.getMessage());
 		}
-    	produit.setMarque(marque);
+    	
     	try {
     		Integer.parseInt(stock);
+    		produit.setStock_dispo(Integer.parseInt(stock));
     		//validationStock(stock);
     	}catch (Exception e) {
 			setErreur(CHAMP_STOCK, e.getMessage());
 		}
-    	produit.setStock_dispo(Integer.parseInt(stock));
+    	
     	
         if ( erreurs.isEmpty() ) {
             resultat = "Succès.";

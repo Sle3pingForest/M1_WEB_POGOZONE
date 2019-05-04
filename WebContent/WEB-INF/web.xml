@@ -72,4 +72,14 @@
     <servlet-name>Profile</servlet-name>
     <url-pattern>/Profile</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <servlet-name>AjoutProduit</servlet-name>
+    <servlet-class>controllers.AjoutProduit</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AjoutProduit</servlet-name>
+    <url-pattern>/AjoutProduit</url-pattern>
+  </servlet-mapping>
+  
+  
 </web-app>
