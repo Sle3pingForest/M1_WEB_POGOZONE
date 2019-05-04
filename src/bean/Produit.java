@@ -6,6 +6,12 @@ public class Produit {
 	private int stock_dispo;
 	
 	
+	
+	public Produit(String type_produit, String marque, int stock_dispo) {
+		this.type_produit = type_produit;
+		this.marque = marque;
+		this.stock_dispo = stock_dispo;
+	}
 	public String getType_produit() {
 		return type_produit;
 	}

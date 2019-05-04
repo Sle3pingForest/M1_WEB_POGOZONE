@@ -14,6 +14,9 @@
 	<form action="ListUsers" method="GET">
 	  	<input type="submit" value="Affiche Users"/>
 	</form>
+		<form action="AjoutProduit" method="GET">
+	  	<input type="submit" value="Ajouter Produit"/>
+	</form>
 	
 	<form action="Deconnexion" method="GET">
 	  	<input type="submit" value="Log Out"/>

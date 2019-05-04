@@ -1,7 +1,13 @@
 package dao;
+import java.io.IOException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+
+import bean.Produit;
+
 
 public class ProduitDAO {
 
@@ -42,6 +48,58 @@ public class ProduitDAO {
 		}
 		
 	}
+	
+	public ArrayList<Produit> listProduit() throws Exception {
+		Statement statement = null;
+		ResultSet rs = null;
+		ArrayList<Produit> listProduit = new ArrayList<>();
+		
+		//System.out.println("demande de connexion ... ");
+		ConnexionBDD con = ConnexionBDD.getInstance();
+		//System.out.println("connecté!");
+		
+		try {
+			statement = con.getCnx().createStatement();
+			rs = statement.executeQuery("select * from PRODUIT");
+			while(rs.next()) {
+				int id = rs.getInt("ID");
+				String type = rs.getString("TYPE_PRODUIT");
+				String marque = rs.getString("MARQUE");
+				int stock = rs.getInt("STOCK_DISPO");
+				listProduit.add(new Produit(type,marque,stock));
+
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			if(rs != null) {
+				try {
+					rs.close();
+				}catch (SQLException e) {
+					// TODO: handle exception
+				}
+			}
+			if(statement != null) {
+				try {
+					statement.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			if(con != null) {
+				try {
+					con.closeCnx();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+		return listProduit;
+	}
+
 	
 	
 
