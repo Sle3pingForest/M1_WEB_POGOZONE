@@ -66,7 +66,7 @@ public class ProduitDAO {
 				String type = rs.getString("TYPE_PRODUIT");
 				String marque = rs.getString("MARQUE");
 				int stock = rs.getInt("STOCK_DISPO");
-				listProduit.add(new Produit(type,marque,stock));
+				listProduit.add(new Produit(id,type,marque,stock));
 
 			}
 		} catch (SQLException e) {
