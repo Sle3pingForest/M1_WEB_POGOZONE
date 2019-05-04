@@ -15,13 +15,19 @@
 		<form method="POST" action="SupprimerUser">
 		        ID: <input type="text" name="idUser" value="${type.key}"  size="5" readOnly="true"/>
 				Name: <input type="text" name="nameUser" value="${type.value}" />
-				<input type="submit" value="Supprimer" />
+				<input type="submit" id ="sup" name="Supprimer" value="Supprimer" />
+				<input type="submit" id="modif" name="Modifier" value="Modifier" />
+				<input type="submit" id="admin" name="Admin" value="SetAdmin" />
 				<br>
-		</form>
-		</c:forEach>
+.		</form>
+
+	</c:forEach>
 		<form action="Profile" method="GET">
 	  		<input type="submit" value="Profile"/>
 		</form>
+
+</body>
+
 
 </body>
 </html>

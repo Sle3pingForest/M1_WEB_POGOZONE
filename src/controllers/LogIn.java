@@ -28,6 +28,7 @@ public class LogIn extends HttpServlet {
     public static final String VUE_USERS             = "/user/User.jsp";
     public static final String VUE_ADMIN            = "/admin/Admin.jsp";
     public static final String VUE_LOGIN            = "/LogIn.jsp";
+    public static String NOM_U          = "";
     public static Map<String,String> listAdmin  = null;
     public static Map<String,String> listUsers  = null;
 
@@ -66,9 +67,9 @@ public class LogIn extends HttpServlet {
              }
         	 else if(isUsers(utilisateur.getEmail(),utilisateur.getMotDePasse())){
         		 session.setAttribute(ATT_ADMIN, false);
-        		 System.out.println("nom users "  +utilisateur.getNom());
-
-        		 request.setAttribute("name", utilisateur.getNom());
+        		 System.out.println("nom users "  + NOM_U);
+        		 
+        		 request.setAttribute("name", NOM_U);
                  this.getServletContext().getRequestDispatcher(VUE_USERS).forward( request, response );
              }
         }
@@ -107,9 +108,11 @@ public class LogIn extends HttpServlet {
     	boolean correct_pass = false;
     	try {
 			listUsers = UsersDAO.selectUsers();
+			
 			if(listUsers.containsKey(mail) && listUsers.get(mail).equals(pass)){
 	    		is_user = true;
 	    		correct_pass = true;
+	    		NOM_U = UsersDAO.getName(mail);
 	    	}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

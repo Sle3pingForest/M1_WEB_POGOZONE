@@ -14,7 +14,7 @@ public class UsersDAO {
 
 	protected static PreparedStatement preparedStatement = null;
 	protected static ResultSet resultSet = null;
-	protected static ArrayList<String> listUserName = null;
+	protected static Map<String,String> listUserName = null;
 	protected static Map<String, String> listAdmin = null;
 	protected static Map<String, String> listUsers = null;
 	protected static Map<String, String> listUsersIdName = null;
@@ -30,10 +30,13 @@ public class UsersDAO {
 			preparedStatement = connect.getCnx().prepareStatement("SELECT * from USER WHERE EST_ADMIN IS NULL");
 			resultSet = preparedStatement.executeQuery();
 			listUsers = new HashMap<String,String>();
+			listUserName = new HashMap<String,String>();
 			while (resultSet.next()) {
 				String email = resultSet.getString("E_MAIL");
 				String pass = resultSet.getString("PASSWORD");
+				String name = resultSet.getString("Nom");
 				listUsers.put(email,pass);
+				listUserName.put(email,name);
 			}
 		} catch (Exception e) {
 			throw e;
@@ -121,6 +124,41 @@ public class UsersDAO {
 			connect.closeCnx();
 		}
 	}
+	
+	public static void settingAdmin(String id)throws Exception{
+		ConnexionBDD connect = ConnexionBDD.getInstance();
+		try {
+			statement = connect.getCnx().createStatement();
+			String q = "UPDATE USER SET EST_ADMIN  = 1 WHERE ID_USER = " +id ;
+			
+			preparedStatement = connect.getCnx().prepareStatement(q);
+			preparedStatement.executeUpdate();
+		} catch (Exception e) {
+			throw e;
+		} finally {
+			connect.closeCnx();
+		}
+	}
+	
+	public static void settingName(String id,String name)throws Exception{
+		ConnexionBDD connect = ConnexionBDD.getInstance();
+		try {
+			statement = connect.getCnx().createStatement();
+			String q = "UPDATE USER SET NOM ='"+ name+ "' WHERE ID_USER = " +id ;
+			
+			preparedStatement = connect.getCnx().prepareStatement(q);
+			preparedStatement.executeUpdate();
+		} catch (Exception e) {
+			throw e;
+		} finally {
+			connect.closeCnx();
+		}
+	}
+	
+	public static String getName(String mail){
+		return listUserName.get(mail);
+	}
+	
 	
 
 }

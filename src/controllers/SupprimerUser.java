@@ -35,10 +35,18 @@ public class SupprimerUser extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		System.out.println(request.getParameter("idUser") + ": " + request.getParameter("nameUser"));
+		System.out.println(request.getParameter("idUser") + ": " + request.getParameter("nameUser") +": " + request.getParameter("Supprimer")  + ":" + request.getParameter("Modifier") );
 		
 		try {
-			UsersDAO.deleteUser(request.getParameter("idUser"), request.getParameter("nameUser"));
+			if(request.getParameter("Supprimer") !=null){
+				UsersDAO.deleteUser(request.getParameter("idUser"), request.getParameter("nameUser"));
+			}
+			if(request.getParameter("Admin") !=null){
+				UsersDAO.settingAdmin(request.getParameter("idUser"));
+			}
+			if(request.getParameter("Modifier") !=null){
+				UsersDAO.settingName(request.getParameter("idUser"), request.getParameter("nameUser"));
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

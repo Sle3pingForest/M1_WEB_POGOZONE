@@ -14,7 +14,18 @@
 	out.println( attribut); 
 	%>
 	<form action="Deconnexion" method="GET">
-	  	<input type="submit" value="Log Out"/>
+	  	<input type="submit" value="Log Out" onClick="return confirmLogout()"/>
 	</form>
+	
+	<script type="text/javascript">
+	function confirmLogout(){
+		var agree = confirm("voulez-vous deconnecté ?");
+		if(agree){
+			return true;
+		}else{
+			return false;
+			}
+		}
+	</script>
 </body>
 </html>
