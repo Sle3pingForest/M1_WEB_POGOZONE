@@ -13,8 +13,8 @@
 		<c:forEach var="type" items="${listename}">
 		
 		<form method="POST" action="SupprimerUser">
-				ID : <input type="text" name="idUser" value="${type.value}" />
-		        Nam: <input type="text" name="nameUser" value="${type.key}"  size="5" readOnly="true"/>
+				ID : <input type="text" name="idUser" value="${type.value}" size="5" readOnly="true"/>
+		        Nam: <input type="text" name="nameUser" value="${type.key}" />
 				<input type="submit" id ="sup" name="Supprimer" value="Supprimer" />
 				<input type="submit" id="modif" name="Modifier" value="Modifier" />
 				<input type="submit" id="admin" name="Admin" value="SetAdmin" />

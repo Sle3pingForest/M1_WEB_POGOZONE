@@ -12,10 +12,7 @@
 </head>
 <body>
 	<p> hello users</p>
-	<%
- 	String attribut = (String)request.getAttribute("name");
-	out.println( attribut); 
-	%>
+
 	</form>
 		<form action="GetListProduit" method="GET">
 	  	<input type="submit" value="Liste Produit"/>
