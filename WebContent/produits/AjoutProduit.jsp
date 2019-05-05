@@ -19,12 +19,6 @@
 
 </form>
 
- <%
-
-        	String attribut =(String) request.getParameter("type_produit");
-        	out.println(attribut);
-        %>
-
 
 </body>
 </html>

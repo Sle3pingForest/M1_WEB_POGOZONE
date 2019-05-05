@@ -75,6 +75,7 @@ public class LogIn extends HttpServlet {
         		 settingCookie(request, response, ID_U, NOM_U);
         		 request.setAttribute("name", NOM_U);
         		 session.setAttribute("idu", ID_U);
+        		 session.setAttribute("name", NOM_U);
                  this.getServletContext().getRequestDispatcher(VUE_USERS).forward( request, response );
              }
         }

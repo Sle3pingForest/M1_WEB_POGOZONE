@@ -6,6 +6,9 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Espace USER</title>
+<script src="https://code.jquery.com/jquery-1.10.2.js"
+	type="text/javascript"></script>
+<script src="js/app-ajax.js" type="text/javascript"></script>
 </head>
 <body>
 	<p> hello users</p>
@@ -21,6 +24,31 @@
 	<form action="Deconnexion" method="GET">
 	  	<input type="submit" value="Log Out" onClick="return confirmLogout()"/>
 	</form>
+	
+	
+	<form onsubmit="return false;">
+		<input type="button" id="monPanier" value="Mon Panier">
+	</form>
+	<br>
+	<br>
+
+	<strong>Les produit dans Mon panier</strong>:
+	<div id="listProduit"></div>
+	<script type="text/javascript">
+		$(document).ready(function() {
+		$('#monPanier').on('click', function () {
+			$.ajax({
+				url : 'MyPanier',
+				data : {
+					userName : $('#monPanier').val()
+				},
+				success : function(responseText) {
+					$('#listProduit').text(responseText);
+				}
+			});
+		});
+	});
+	</script>
 	
 	<script type="text/javascript">
 	function confirmLogout(){

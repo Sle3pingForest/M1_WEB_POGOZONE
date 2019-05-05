@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import bean.Panier;
+import bean.Produit;
 import dao.PanierDAO;
 
 /**
@@ -43,19 +44,20 @@ public class AjoutPanier extends HttpServlet {
 		Panier panier = null;
 		for (Cookie c : listeCookies) {
 			System.out.println("id: "+ c.getName() + " **" + session.getAttribute("idu"));
-			if(c.getName().equals(session.getAttribute("idu"))){
+			if(c.getName().equals(session.getAttribute("idu")) && request.getParameter("idProduit") !=null  &&  request.getParameter("type") !=null){
 				panier = new Panier(c.getName(), c);
 				String id_prod = request.getParameter("idProduit");
-				System.out.println("id produit" +  id_prod);
+				String nom_prod = request.getParameter("type");
 				panier.ajoutProduit(id_prod, 1);
 				try {
-					PanierDAO.insertPanier(c.getName(), session.getAttribute("idu").toString(),id_prod, 1);
+					PanierDAO.insertPanier(c.getName(), session.getAttribute("idu").toString(),id_prod,nom_prod, 1);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
 			}
-				
 		}
+		 this.getServletContext().getRequestDispatcher( "/user/User.jsp" ).forward( request, response );
+		 //response.sendRedirect("/produits/ListeProduits.jsp");
 	}
 
 	/**

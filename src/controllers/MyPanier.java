@@ -1,6 +1,12 @@
 package controllers;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -8,20 +14,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import dao.PanierDAO;
+
 /**
- * Servlet implementation class ProfileServlet
+ * Servlet implementation class MyPanier
  */
-@WebServlet("/ProfileServlet")
-public class ProfileServlet extends HttpServlet {
+@WebServlet("/MyPanier")
+public class MyPanier extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-    public static final String ATT_ADMIN        = "admin";
-    public static final String VUE_ADMIN            = "/admin/Admin.jsp";
-    public static final String VUE_USERS             = "/user/User.jsp";
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ProfileServlet() {
+    public MyPanier() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,14 +38,24 @@ public class ProfileServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 
         HttpSession session = request.getSession();
-        System.out.println(session.getAttribute(ATT_ADMIN));
-		if((boolean) session.getAttribute(ATT_ADMIN)){
-			this.getServletContext().getRequestDispatcher(VUE_ADMIN).forward( request, response );
+        
+		String id = (String) session.getAttribute("idu");
+		Map<String,String> listProd = new HashMap<>();
+		String name = "Nom Prod: " ;
+		String qte = "Quantite : " ;
+		String s  = "";
+		try {
+			listProd=PanierDAO.getPanier(id, id);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-		else {
-			request.setAttribute("name",  session.getAttribute("name"));
-			this.getServletContext().getRequestDispatcher(VUE_USERS).forward( request, response );
+		if(listProd != null){
+			for(Map.Entry mapentry : listProd.entrySet()){
+		         s +=  name + mapentry.getKey() + " " + qte + mapentry.getValue() ;
+		      }
 		}
+		response.getWriter().append(s);
 	}
 
 	/**

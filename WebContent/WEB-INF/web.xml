@@ -80,8 +80,7 @@
     <servlet-name>AjoutProduit</servlet-name>
     <url-pattern>/AjoutProduit</url-pattern>
   </servlet-mapping>
-  
-    <servlet>
+  <servlet>
     <servlet-name>AjoutPanier</servlet-name>
     <servlet-class>controllers.AjoutPanier</servlet-class>
   </servlet>

@@ -1,3 +1,4 @@
+<%@page import="controllers.ProfileServlet"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -6,6 +7,9 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<script src="https://code.jquery.com/jquery-1.10.2.js"
+	type="text/javascript"></script>
+<script src="js/app-ajax.js" type="text/javascript"></script>
 </head>
 <body>
 	<p>Liste des produits :</p>
@@ -33,7 +37,7 @@
 				size="5" readOnly="true" /> Type de Produit : <input type="text"
 				name="type" value="${type.getType_produit()}" /> Marque : <input
 				type="text" name="marque" value="${type.getMarque()}" /> Stock
-				disponible : <input type="text" name="stock"
+				disponible : <input type="text" name="stock" id="qte"
 				value="${type.getStock_dispo()}" />
 				<input type="submit" id="ajout" name="Ajouter"
 					value="Ajouter" />
@@ -41,8 +45,11 @@
 
 		</c:if>
 	</c:forEach>
-
-
+		<form action="Profile" method="GET">
+	  		<input type="submit" value="Profile"/>
+		</form>
+		
+		<div id="listProduit"></div>
 
 </body>
 </html>
