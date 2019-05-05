@@ -7,6 +7,7 @@ import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -29,6 +30,7 @@ public class LogIn extends HttpServlet {
     public static final String VUE_ADMIN            = "/admin/Admin.jsp";
     public static final String VUE_LOGIN            = "/LogIn.jsp";
     public static String NOM_U          = "";
+    public static String ID_U;
     public static Map<String,String> listAdmin  = null;
     public static Map<String,String> listUsers  = null;
 
@@ -48,15 +50,17 @@ public class LogIn extends HttpServlet {
         HttpSession session = request.getSession();
         
 
-     
+        
+        
         
         if((isAdmin(utilisateur.getEmail(), utilisateur.getMotDePasse())|| 	isUsers(utilisateur.getEmail(),utilisateur.getMotDePasse()))){
-        	   if(form.getErreurs().isEmpty() ) {
-                   session.setAttribute( ATT_SESSION_USER, utilisateur);
-               } 
-               else {
-                   session.setAttribute( ATT_SESSION_USER, null );
-               }
+	    	   if(form.getErreurs().isEmpty() ) {
+	               session.setAttribute( ATT_SESSION_USER, utilisateur);
+	               
+	           } 
+	           else {
+	               session.setAttribute( ATT_SESSION_USER, null );
+	           }
                
                request.setAttribute( ATT_FORM, form );
                request.setAttribute( ATT_USER, utilisateur );
@@ -68,8 +72,9 @@ public class LogIn extends HttpServlet {
         	 else if(isUsers(utilisateur.getEmail(),utilisateur.getMotDePasse())){
         		 session.setAttribute(ATT_ADMIN, false);
         		 System.out.println("nom users "  + NOM_U);
-        		 
+        		 settingCookie(request, response, ID_U, NOM_U);
         		 request.setAttribute("name", NOM_U);
+        		 session.setAttribute("idu", ID_U);
                  this.getServletContext().getRequestDispatcher(VUE_USERS).forward( request, response );
              }
         }
@@ -113,6 +118,7 @@ public class LogIn extends HttpServlet {
 	    		is_user = true;
 	    		correct_pass = true;
 	    		NOM_U = UsersDAO.getName(mail);
+	    		ID_U = UsersDAO.getId(NOM_U);
 	    	}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -122,4 +128,9 @@ public class LogIn extends HttpServlet {
     	
     }
 
+    private void settingCookie( HttpServletRequest request, HttpServletResponse response , String id, String name){
+	 	Cookie cookie = new Cookie(id, name);
+	    response.addCookie(cookie);
+    	    
+    }
 }

@@ -31,12 +31,15 @@ public class UsersDAO {
 			resultSet = preparedStatement.executeQuery();
 			listUsers = new HashMap<String,String>();
 			listUserName = new HashMap<String,String>();
+			listUsersIdName = new HashMap<>();
 			while (resultSet.next()) {
 				String email = resultSet.getString("E_MAIL");
 				String pass = resultSet.getString("PASSWORD");
 				String name = resultSet.getString("Nom");
+				String id = resultSet.getString("ID_USER");
 				listUsers.put(email,pass);
 				listUserName.put(email,name);
+				listUsersIdName.put(name,id);
 			}
 		} catch (Exception e) {
 			throw e;
@@ -60,7 +63,7 @@ public class UsersDAO {
 			while (resultSet.next()) {
 				String id = resultSet.getString("ID_USER");
 				String nom = resultSet.getString("NOM");
-				listUsersIdName.put(id,nom);
+				listUsersIdName.put(nom,id);
 			}
 		} catch (Exception e) {
 			throw e;
@@ -159,6 +162,8 @@ public class UsersDAO {
 		return listUserName.get(mail);
 	}
 	
-	
+	public static String getId(String name){
+		return listUsersIdName.get(name);
+	}
 
 }

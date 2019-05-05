@@ -46,6 +46,9 @@ public class GetListProduit extends HttpServlet {
         if ((boolean) session.getAttribute(ATT_ADMIN)) {
             request.setAttribute( "admin", true );
         }
+        else{
+        	request.setAttribute( "user", true );
+        }
 
 		
 		try {
