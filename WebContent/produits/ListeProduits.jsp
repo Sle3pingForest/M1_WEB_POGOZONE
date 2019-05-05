@@ -17,9 +17,10 @@
 				Type de Produit : <input type="text" name="type" value="${type.getType_produit()}" />
 				Marque : <input type="text" name="marque" value="${type.getMarque()}" />
 				Stock disponible : <input type="text" name="stock" value="${type.getStock_dispo()}" />
+				<c:if test="${admin}" >
 				<input type="submit" id ="sup" name="Supprimer" value="Supprimer" />
 				<input type="submit" id="modif" name="Modifier" value="Modifier" />
-				
+				</c:if>
 				<br>
 .		</form>
 

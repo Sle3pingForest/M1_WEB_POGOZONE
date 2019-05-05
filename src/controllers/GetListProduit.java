@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import bean.Produit;
 import dao.ProduitDAO;
@@ -18,7 +19,8 @@ import dao.ProduitDAO;
 @WebServlet("/GetListProduit")
 public class GetListProduit extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	public static final String ATT_NAME          = "produits";
+	public static final String ATT_NAME        = "produits";
+	public static final String ATT_ADMIN       = "admin";
 	private static ArrayList<Produit> produits = new ArrayList<>();
     /**
      * @see HttpServlet#HttpServlet()
@@ -34,6 +36,17 @@ public class GetListProduit extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
+		
+		HttpServletRequest req = (HttpServletRequest) request;
+       
+
+        HttpSession session = req.getSession();
+
+        //System.out.println(session.getAttribute(ATT_ADMIN));
+        if ((boolean) session.getAttribute(ATT_ADMIN)) {
+            request.setAttribute( "admin", true );
+        }
+
 		
 		try {
 			produits = ProduitDAO.listProduit();
