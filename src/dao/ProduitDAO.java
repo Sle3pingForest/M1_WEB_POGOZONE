@@ -50,14 +50,7 @@ public class ProduitDAO {
 	}
 	
 	public static void modifierProduit(int id,String type,String marque) throws Exception{
-		/*UPDATE nom_table 
 
-SET col1 = val1 [, col2 = val2, ...] 
-
-[WHERE ...];
-
-*update PRODUIT SET TYPE_PRODUIT='AZERTO', MARQUE='CLAVIER' WHERE ID = 2;
-*/
 		ConnexionBDD connect = ConnexionBDD.getInstance();
 		try {
 			statement = connect.getCnx().createStatement();
@@ -128,7 +121,25 @@ SET col1 = val1 [, col2 = val2, ...]
 		return listProduit;
 	}
 
+	public static void modifierStock(int id,int stock) throws Exception {
+		
+		ConnexionBDD connect = ConnexionBDD.getInstance();
+		try {
+			statement = connect.getCnx().createStatement();
+			String q = "UPDATE PRODUIT SET STOCK_DISPO="+stock+" WHERE ID="+id+";";
 
+			preparedStatement = connect.getCnx().prepareStatement(q);
+			preparedStatement.executeUpdate();
+			
+		}catch (Exception e) {
+			throw e;
+		} finally {
+			connect.closeCnx();
+		}
+		
+		
+	}
+	
 	public static void insertProduit(Produit produit) throws Exception {
 		insertProduit(produit.getType_produit(), produit.getMarque(), produit.getStock_dispo());
 		
