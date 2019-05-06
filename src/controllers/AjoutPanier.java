@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 import bean.Panier;
 import bean.Produit;
 import dao.PanierDAO;
+import dao.ProduitDAO;
 
 /**
  * Servlet implementation class AjoutPanier
@@ -51,6 +52,7 @@ public class AjoutPanier extends HttpServlet {
 				panier.ajoutProduit(id_prod, 1);
 				try {
 					PanierDAO.insertPanier(c.getName(), session.getAttribute("idu").toString(),id_prod,nom_prod, 1);
+					ProduitDAO.modifierStock(Integer.parseInt(id_prod));
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

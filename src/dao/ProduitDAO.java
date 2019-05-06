@@ -139,6 +139,24 @@ public class ProduitDAO {
 		
 		
 	}
+	public static void modifierStock(int id) throws Exception {
+		
+		ConnexionBDD connect = ConnexionBDD.getInstance();
+		try {
+			statement = connect.getCnx().createStatement();
+			String q = "UPDATE PRODUIT SET STOCK_DISPO=STOCK_DISPO-1 WHERE ID="+id+";";
+
+			preparedStatement = connect.getCnx().prepareStatement(q);
+			preparedStatement.executeUpdate();
+			
+		}catch (Exception e) {
+			throw e;
+		} finally {
+			connect.closeCnx();
+		}
+		
+		
+	}
 	
 	public static void insertProduit(Produit produit) throws Exception {
 		insertProduit(produit.getType_produit(), produit.getMarque(), produit.getStock_dispo());
