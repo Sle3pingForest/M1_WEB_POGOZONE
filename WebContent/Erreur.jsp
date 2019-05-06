@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h1>ERREUR 404 : LE POKEMON DEMANDÉ N'EXISTE PAS</h1>
+<h1>ERREUR 404 : LA PAGE DEMANDÉ N'EXISTE PAS</h1>
 		<a href="LogIn.jsp">Login</a>
 		<br>
 		<a href="Inscription.jsp">Inscription</a><br>
