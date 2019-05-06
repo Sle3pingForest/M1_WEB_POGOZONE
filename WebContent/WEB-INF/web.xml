@@ -88,4 +88,8 @@
     <servlet-name>AjoutPanier</servlet-name>
     <url-pattern>/AjoutPanier</url-pattern>
   </servlet-mapping>
+    <error-page>
+        <error-code>404</error-code>
+        <location>/Erreur.jsp</location>
+    </error-page>
 </web-app>
