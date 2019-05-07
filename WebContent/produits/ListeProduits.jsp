@@ -6,13 +6,14 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="css/Style.css" type="text/css"/>
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-1.10.2.js"
 	type="text/javascript"></script>
 <script src="js/app-ajax.js" type="text/javascript"></script>
 </head>
 <body>
-	<p>Liste des produits :</p>
+	<h1>Liste des produits :</h1>
 	</br>
 
 	<c:forEach var="type" items="${produits}">

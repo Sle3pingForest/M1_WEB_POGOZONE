@@ -5,13 +5,14 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="css/Style.css" type="text/css"/>
 <title>Espace USER</title>
 <script src="https://code.jquery.com/jquery-1.10.2.js"
 	type="text/javascript"></script>
 <script src="js/app-ajax.js" type="text/javascript"></script>
 </head>
 <body>
-	<p> hello users</p>
+	<p id="user"> Hello users</p>
 
 	</form>
 		<form action="GetListProduit" method="GET">
