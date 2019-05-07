@@ -1,6 +1,7 @@
 @charset "UTF-8";
 body{
-	background-color: red;
+	background: url("../img/paysage.JPG") fixed no-repeat center ;
+	background-size: cover;
 }
 h1{
 	color:blue;
