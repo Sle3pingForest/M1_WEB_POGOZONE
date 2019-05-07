@@ -49,16 +49,17 @@ public class ProduitDAO {
 		
 	}
 	
-	public static void modifierProduit(int id,String type,String marque) throws Exception{
+	public static void modifierProduit(int id,String type,String marque,int stock) throws Exception{
 
 		ConnexionBDD connect = ConnexionBDD.getInstance();
 		try {
 			statement = connect.getCnx().createStatement();
 			//DELETE FROM PRODUIT WHERE(TYPE_PRODUIT='CARAPUCE' AND MARQUE='POKEMON');
-			String q ="UPDATE PRODUIT SET TYPE_PRODUIT='"+type+"',MARQUE='"+marque+"' WHERE ID="+id+";";//(TYPE_PRODUIT='"+type_produit+"'AND MARQUE='"+marque+"');";
+			String q ="UPDATE PRODUIT SET TYPE_PRODUIT='"+type+"',MARQUE='"+marque+"',STOCK_DISPO="+stock+" WHERE ID="+id+";";//(TYPE_PRODUIT='"+type_produit+"'AND MARQUE='"+marque+"');";
+			
 			preparedStatement = connect.getCnx().prepareStatement(q);
 			preparedStatement.executeUpdate();
-			
+			System.out.println("q :"+ q);
 		}catch (Exception e) {
 			throw e;
 		} finally {

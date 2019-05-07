@@ -52,7 +52,7 @@ public class MyPanier extends HttpServlet {
 		}
 		if(listProd != null){
 			for(Map.Entry mapentry : listProd.entrySet()){
-		         s +=  name + mapentry.getKey() + " " + qte + mapentry.getValue() ;
+		         s +=  name + mapentry.getKey() + " " + qte + mapentry.getValue()+"</br>" ;
 		      }
 		}
 		response.getWriter().append(s);

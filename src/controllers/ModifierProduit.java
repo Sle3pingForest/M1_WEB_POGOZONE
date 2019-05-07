@@ -1,12 +1,15 @@
 package controllers;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import bean.Produit;
 import dao.ProduitDAO;
 
 /**
@@ -16,7 +19,8 @@ import dao.ProduitDAO;
 public class ModifierProduit extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	 
-	public static final String VUE_ADMIN = "/admin/Admin.jsp";
+	public static final String VUE_PRODUIT = "/produits/ListeProduits.jsp";
+	private static ArrayList<Produit> produits = new ArrayList<>();
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -37,17 +41,22 @@ public class ModifierProduit extends HttpServlet {
 			String type_produit = request.getParameter("type");
 			String marque = request.getParameter("marque");
 			int id = Integer.parseInt(request.getParameter("idProduit"));
+			int stock = Integer.parseInt(request.getParameter("stock"));
 			if(request.getParameter("Supprimer")!=null) {
 				ProduitDAO.supprProduit(type_produit, marque);
 			}
 			if (request.getParameter("Modifier")!=null) {
-				ProduitDAO.modifierProduit(id, type_produit, marque);
+				ProduitDAO.modifierProduit(id, type_produit, marque,stock);
 			}
+			
+			produits = ProduitDAO.listProduit();
 		} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 		}
-		this.getServletContext().getRequestDispatcher(VUE_ADMIN).forward( request, response );
+		request.setAttribute("produits", produits);
+		this.getServletContext().getRequestDispatcher( "/produits/ListeProduits.jsp" ).forward( request, response );
+		//this.getServletContext().getRequestDispatcher(VUE_PRODUIT).forward( request, response );
 		
 		
 		

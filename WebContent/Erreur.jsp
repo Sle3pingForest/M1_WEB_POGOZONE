@@ -7,10 +7,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h1>ERREUR 404 : LA PAGE DEMANDÉ N'EXISTE PAS</h1>
-		<a href="LogIn.jsp">Login</a>
-		<br>
-		<a href="Inscription.jsp">Inscription</a><br>
-		<a href="index.html">Accueil</a>
+<h1>ERREUR 404 : LA PAGE DEMANDÉE N'EXISTE PAS</h1>
+
+		<a href="/projet/index.html">Accueil</a>
 </body>
 </html>

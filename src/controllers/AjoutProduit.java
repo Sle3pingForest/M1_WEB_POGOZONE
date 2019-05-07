@@ -20,7 +20,7 @@ public class AjoutProduit extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 	
-	public static final String VUE_FORMULAIRE_AJOUT = "/produits/AjoutProduit.jsp";
+	public static final String VUE_FORMULAIRE_AJOUT = "/admin/AjoutProduit.jsp";
     public static final String VUE_ADMIN = "/admin/Admin.jsp";
 	
     /**
