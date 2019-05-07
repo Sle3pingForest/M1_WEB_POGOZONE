@@ -4,8 +4,7 @@
 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
  <style>
- 
-          
+
         </style>
 <link rel="stylesheet" href="css/Style.css" type="text/css"/>
 <title>Log In</title>
@@ -15,16 +14,34 @@
 	<a href="LogIn.jsp">Login</a>
 	<br>
 	<a href="Inscription.jsp">Inscription</a>
+	
 
 
 
-		<script type="text/javascript"> 
-			function viewImage(id) { 
-				document.getElementById(id).innerHTML="<img src='img/magikarp.png'>";
-			} 
-		</script>	
-
-		<div id="bouton" onclick="javascript:viewImage('image');"> Afficher l'image  </div>
-		<div id="image"></div>
 </body>
+<footer id="sectionImage"></footer>
+	
+
+	<script type="text/javascript"> 
+		function viewImage() { 
+			var tab = ['img/PikachuHello.jpg'];
+			mon_tableau_lg= tab.length;
+			var i;
+			for (i = 0; i < mon_tableau_lg; i++) {
+				setTimeout(1000);
+				var elem = document.createElement("img");
+				elem.src = tab[i];
+				elem.style.height = '200px';
+			    elem.style.width = '200px';
+			    document.getElementById("sectionImage").appendChild(elem);
+			}
+			
+		} 
+		(function(){
+			var time = 5; /* time in seconds until display */
+			setTimeout(function(){viewImage() ;},time*1000);
+			})();
+		
+	</script>	
+
 </html>
