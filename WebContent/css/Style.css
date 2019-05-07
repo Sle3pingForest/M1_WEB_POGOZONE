@@ -1,2 +1,7 @@
 @charset "UTF-8";
-background : green;
+body{
+	background-color: red;
+}
+h1{
+	color:blue;
+}
