@@ -4,6 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="css/Style.css" type="text/css"/>
 <title>Ajout de produit</title>
  <link type="text/css" rel="stylesheet" href="form.css" />
 </head>

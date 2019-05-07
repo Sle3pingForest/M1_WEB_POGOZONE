@@ -6,6 +6,7 @@
         <meta charset="utf-8" />
         <title>Inscription</title>
         <link type="text/css" rel="stylesheet" href="form.css" />
+        <link rel="stylesheet" href="css/Style.css" type="text/css"/>
     </head>
     <body>
         <form method="get" action="Inscription">

@@ -6,10 +6,11 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="css/Style.css" type="text/css"/>
 <title>Espace ADMIN</title>
 </head>
 <body>
-	<p> hello admin </p>
+	<p id="admin"> Hello admin </p>
 
 	<form action="ListUsers" method="GET">
 	  	<input type="submit" value="Affiche Users"/>

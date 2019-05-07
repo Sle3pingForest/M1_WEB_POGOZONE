@@ -4,10 +4,11 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="css/Style.css" type="text/css"/>
 <title>Insert title here</title>
 </head>
 <body>
-<h1>ERREUR 404 : LA PAGE DEMANDÉE N'EXISTE PAS</h1>
+<h1 id="erreur">ERREUR 404 : LA PAGE DEMANDÉE N'EXISTE PAS</h1>
 
 		<a href="/projet/index.html">Accueil</a>
 </body>
