@@ -6,10 +6,20 @@
 <title>Log In</title>
 </head>
 <body>
-	<h1>PoGoZONE</h1>  
-		<a href="LogIn.jsp">Login</a>
-		<br>
-		<a href="Inscription.jsp">Inscription</a>
-	  
+	<h1>PoGoZONE</h1>
+	<a href="LogIn.jsp">Login</a>
+	<br>
+	<a href="Inscription.jsp">Inscription</a>
+
+
+
+		<script type="text/javascript"> 
+			function viewImage(id) { 
+				document.getElementById(id).innerHTML="<img src='img/magikarp.png'>";
+			} 
+		</script>	
+
+		<div id="bouton" onclick="javascript:viewImage('image');"> Afficher l'image  </div>
+		<div id="image"></div>
 </body>
 </html>
